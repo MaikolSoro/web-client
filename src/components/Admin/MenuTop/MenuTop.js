@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Icon } from "antd";
-import logo from "../../../assets/img/jpg/logo-white.png";
+import logo from "../../../assets/img/png/logoWeb2.png";
 import "./MenuTop.scss";
 
 
