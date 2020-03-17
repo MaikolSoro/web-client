@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Form, Icon, Input, Button, Checkbox, notification } from "antd";
 import "./RegisterForm.scss";
 import { emailValidation, minLengthValidation} from "../../../Utils/formValidation";
+import { signUpApi } from "../../../api/user";
 
 export default function RegisterForm() {
   // eslint-disable-next-line no-lone-blocks
@@ -39,8 +40,8 @@ export default function RegisterForm() {
   };
 
   /*-----------------------------*/
-  /* Valiacion de los input del email, password y el checkbox, 
-  Lo validamos para que sean los datos correctos
+  /* Validación de los input del email, password y el checkbox, 
+    Lo validamos para que sean los datos correctos
   */
   /*-----------------------------*/
 
@@ -80,10 +81,46 @@ export default function RegisterForm() {
         });
       } else {
             // TODO: CONECTAR CON EL API Y REGISTRAR EL USUARIO
+            const result = await signUpApi(inputs);  
+            if(!result.ok){
+                notification["error"]({
+                message: result.message
+              });
+            } else {
+                notification["success"]({
+                message: result.message
+              });
+              resetForm();
+            }
       }
     }
   };
 
+  const resetForm = () =>{
+
+    // eslint-disable-next-line no-unused-vars
+    const input =  document.getElementsByTagName('input');
+
+    for(let i = 0; i < inputs.length; i++){
+      inputs[i].classList.remove("success");
+      inputs[i].classList.remove("error");
+    }
+
+    setInputs({
+      email: "",
+      password: "",
+      repeatPassword: "",
+      privacyPolicy: false
+    });
+
+    setFormValid({
+      email: false,
+      password: false,
+      repeatPassword:false,
+      privacyPolicy: false
+    });
+
+  }
   return (
     <Form className="register-form" onSubmit={register} onChange={changeForm}>
       <Form.Item>
