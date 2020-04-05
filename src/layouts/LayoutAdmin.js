@@ -15,7 +15,7 @@ function LayoutAdmin(props) {
   const user = null;
 
   if(!user){
-    return(
+    return (
       <>
         <Route path="/admin/login" component={AdminSignIn} />
         <Redirect to="/admin/login" />
@@ -23,6 +23,7 @@ function LayoutAdmin(props) {
 
     );
   }
+  
   return (
     <Layout>
       {/*TODO: Menu Sider*/}
