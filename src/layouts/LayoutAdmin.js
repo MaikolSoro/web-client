@@ -4,6 +4,7 @@ import { Layout } from "antd";
 import MenuTop from "../components/Admin/MenuTop";
 import MenuSider from "../components/Admin/MenuSider";
 import AdminSignIn from "../pages/Admin/SignIn";
+// import {getAcceesToken, getRefreshToken} from "../api/auth";
 
 import "./LayoutAdmin.scss";
 
@@ -13,6 +14,13 @@ function LayoutAdmin(props) {
   const { Header, Content, Footer } = Layout;
 
   const user = null;
+
+  // const accessToken = getAcceesToken(); 
+  // console.log('access token:' + accessToken);
+
+  // const refreshToken = getAcceesToken(); 
+  // console.log('access token:' + refreshToken);
+  
 
   if(!user){
     return (

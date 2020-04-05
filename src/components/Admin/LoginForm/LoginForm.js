@@ -25,21 +25,22 @@ export default function LoginForm() {
 
         if(result.message) {
             notification["error"]({
-                message:result.message
+                message: result.message
             });
         } else {
-            const {accessToken, refreshToken} = result;
+            const { accessToken, refreshToken } = result;
             localStorage.setItem(ACCESS_TOKEN, accessToken);
             localStorage.setItem(REFRESH_TOKEN, refreshToken);
-
+      
             notification["success"]({
-                message: "Login correcto."
+              message: "Login correcto."
             });
-                window.location.href = "/admin";
-        }
-        // console.log(inputs);
-    };
-
+      
+            window.location.href = "/admin";
+          }
+      
+          console.log(result);
+        };
 
     return (
         <Form className="login-form" onChange={changeForm} onSubmit={login}>

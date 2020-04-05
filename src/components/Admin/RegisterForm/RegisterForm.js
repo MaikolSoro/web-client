@@ -1,49 +1,40 @@
-
 import React, { useState } from "react";
 import { Form, Icon, Input, Button, Checkbox, notification } from "antd";
-import "./RegisterForm.scss";
-import { emailValidation, minLengthValidation} from "../../../Utils/formValidation";
+import {
+  emailValidation,
+  minLengthValidation
+} from "../../../Utils/formValidation";
 import { signUpApi } from "../../../api/user";
 
-export default function RegisterForm() {
-  // eslint-disable-next-line no-lone-blocks
-  {
-    /**INPUTS: VA CONTENER EL VALOR
-        SETINPUTS: VA MODIFICAR EL VALOR */
-  }
-  const [inputs, setInputs] = useState({
-      email: "",
-      password: "",
-      repeatPassword: "",
-      privacyPolicy: false
-  });
+import "./RegisterForm.scss";
 
+export default function RegisterForm() {
+  const [inputs, setInputs] = useState({
+    email: "",
+    password: "",
+    repeatPassword: "",
+    privacyPolicy: false
+  });
   const [formValid, setFormValid] = useState({
     email: false,
     password: false,
-    repeatPassword:false,
+    repeatPassword: false,
     privacyPolicy: false
   });
 
-  const changeForm = e =>{
-    if(e.target.name === "privacyPolicy"){
-        setInputs({
-            ...inputs,
-            [e.target.name]: e.target.checked
-        });
-    }else{
-        setInputs({
-            ...inputs,
-            [e.target.name]: e.target.value
-        });
+  const changeForm = e => {
+    if (e.target.name === "privacyPolicy") {
+      setInputs({
+        ...inputs,
+        [e.target.name]: e.target.checked
+      });
+    } else {
+      setInputs({
+        ...inputs,
+        [e.target.name]: e.target.value
+      });
     }
   };
-
-  /*-----------------------------*/
-  /* Validación de los input del email, password y el checkbox, 
-    Lo validamos para que sean los datos correctos
-  */
-  /*-----------------------------*/
 
   const inputValidation = e => {
     const { type, name } = e.target;
@@ -57,11 +48,8 @@ export default function RegisterForm() {
     if (type === "checkbox") {
       setFormValid({ ...formValid, [name]: e.target.checked });
     }
-  };             
+  };
 
-  /*-----------------------------*/
-  /* Validamos cuando registramos, confirmamos que todos los campos este llenos y correctos */
-  /*-----------------------------*/
   const register = async e => {
     e.preventDefault();
 
@@ -80,28 +68,25 @@ export default function RegisterForm() {
           message: "Las contraseñas tienen que ser iguales."
         });
       } else {
-            // TODO: CONECTAR CON EL API Y REGISTRAR EL USUARIO
-            const result = await signUpApi(inputs);  
-            if(!result.ok){
-                notification["error"]({
-                message: result.message
-              });
-            } else {
-                notification["success"]({
-                message: result.message
-              });
-              resetForm();
-            }
+        const result = await signUpApi(inputs);
+        if (!result.ok) {
+          notification["error"]({
+            message: result.message
+          });
+        } else {
+          notification["success"]({
+            message: result.message
+          });
+          resetForm();
+        }
       }
     }
   };
 
-  const resetForm = () =>{
+  const resetForm = () => {
+    const inputs = document.getElementsByTagName("input");
 
-    // eslint-disable-next-line no-unused-vars
-    const input =  document.getElementsByTagName('input');
-
-    for(let i = 0; i < inputs.length; i++){
+    for (let i = 0; i < inputs.length; i++) {
       inputs[i].classList.remove("success");
       inputs[i].classList.remove("error");
     }
@@ -116,11 +101,11 @@ export default function RegisterForm() {
     setFormValid({
       email: false,
       password: false,
-      repeatPassword:false,
+      repeatPassword: false,
       privacyPolicy: false
     });
+  };
 
-  }
   return (
     <Form className="register-form" onSubmit={register} onChange={changeForm}>
       <Form.Item>
@@ -134,7 +119,6 @@ export default function RegisterForm() {
           value={inputs.email}
         />
       </Form.Item>
-
       <Form.Item>
         <Input
           prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
@@ -158,8 +142,12 @@ export default function RegisterForm() {
         />
       </Form.Item>
       <Form.Item>
-        <Checkbox name="privacyPolicy" onChange={inputValidation} checked= {inputs.privacyPolicy}>
-          He leído y aceptado la política de privacidad
+        <Checkbox
+          name="privacyPolicy"
+          onChange={inputValidation}
+          checked={inputs.privacyPolicy}
+        >
+          He leído y acepto la política de privacidad.
         </Checkbox>
       </Form.Item>
       <Form.Item>

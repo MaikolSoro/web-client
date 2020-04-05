@@ -1,6 +1,6 @@
 import React from "react";
 import { Layout, Tabs } from "antd";
-import { Redirect  } from "react-router-dom";
+// import { Redirect  } from "react-router-dom";
 import logo from "../../../assets/img/png/LOGO21.png";
 
 import RegisterForm from '../../../components/Admin/RegisterForm';
