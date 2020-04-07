@@ -22,6 +22,52 @@ export function getAccessTokenApi() {
     return willExpireToken(refreshToken) ? null : refreshToken;
   }
 
+   /*-----------------------------*/
+   /* Esta función  lo que hace es que  refresca el accesToken desde el cliente */
+   /*-----------------------------*/
+
+  export function refreshAccessTokenApi(refreshToken) {
+    const url = `${basePath}/${apiVersion}/refresh-access-token`;
+
+    const bodyObj = {
+      refreshToken: refreshToken
+    }
+    const params =  {
+      method:"POST",
+      body: JSON.stringify(bodyObj),
+      headers: {
+        "Content-Type": "application/json"
+
+      }
+    };
+    fetch(url, params).then(response =>{
+      if(response.status !== 200) {
+          return null;
+      }
+      return response.json();
+    }).then(result => {
+      if(!result){
+       //TODO: Delogear el usuario
+        logout();
+
+      }else {
+        const {accessToken, refreshToken} = result;
+        localStorage.setItem(ACCESS_TOKEN, accessToken);
+        localStorage.setItem(REFRESH_TOKEN, refreshToken);
+
+
+      }
+    });
+  }
+
+  /*-----------------------------*/
+  /* Borrar el accesstoken y refreshtoken del localStorage*/
+  /*-----------------------------*/
+  export function logout() {
+    localStorage.removeItem(ACCESS_TOKEN);
+    localStorage.removeItem(REFRESH_TOKEN);
+  }
+
 function willExpireToken(token) {
 
     const seconds = 60;
@@ -31,3 +77,5 @@ function willExpireToken(token) {
     const  now = (Date.now() + seconds) / 1000;
     return now > exp;
 }
+
+

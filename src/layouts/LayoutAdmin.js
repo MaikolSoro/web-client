@@ -5,15 +5,14 @@ import MenuTop from "../components/Admin/MenuTop";
 import MenuSider from "../components/Admin/MenuSider";
 import AdminSignIn from "../pages/Admin/SignIn";
 // import {getAcceesToken, getRefreshToken} from "../api/auth";
-
+import useAuth from "../hooks/useAuth";
 import "./LayoutAdmin.scss";
 
 function LayoutAdmin(props) {
   const { routes } = props;
   const [menuCollapsed, setMenuCollapsed] = useState(false);
   const { Header, Content, Footer } = Layout;
-
-  const user = null;
+  const { user, isLoading } = useAuth();
 
   // const accessToken = getAcceesToken(); 
   // console.log('access token:' + accessToken);
