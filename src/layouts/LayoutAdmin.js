@@ -21,7 +21,7 @@ function LayoutAdmin(props) {
   // console.log('access token:' + refreshToken);
   
 
-  if(!user){
+  if(!user && !isLoading){
     return (
       <>
         <Route path="/admin/login" component={AdminSignIn} />
@@ -30,23 +30,26 @@ function LayoutAdmin(props) {
 
     );
   }
-  
-  return (
-    <Layout>
-      {/*TODO: Menu Sider*/}
-      <MenuSider menuCollapsed={menuCollapsed}/>
-      <Layout className="layout-admin" style={{marginLeft: menuCollapsed ? "80px" : "200px"}}>
-        <Header className="layout-admin__header">
-          {/*TODO: Menu top*/}
-          <MenuTop menuCollapsed={menuCollapsed} setMenuCollapsed = {setMenuCollapsed} />
-        </Header>
-        <Content className="layout-admin__content">
-          <LoadRoutes routes={routes} />
-        </Content>
-        <Footer className="layout-admin__footer">Michael Soro </Footer>
+  if(user && !isLoading){
+    return (
+      <Layout>
+        {/*TODO: Menu Sider*/}
+        <MenuSider menuCollapsed={menuCollapsed}/>
+        <Layout className="layout-admin" style={{marginLeft: menuCollapsed ? "80px" : "200px"}}>
+          <Header className="layout-admin__header">
+            {/*TODO: Menu top*/}
+            <MenuTop menuCollapsed={menuCollapsed} setMenuCollapsed = {setMenuCollapsed} />
+          </Header>
+          <Content className="layout-admin__content">
+            <LoadRoutes routes={routes} />
+          </Content>
+          <Footer className="layout-admin__footer">Michael Soro </Footer>
+        </Layout>
       </Layout>
-    </Layout>
-  );
+    );
+
+  }
+  return null;
 }
 
 
