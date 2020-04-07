@@ -14,7 +14,7 @@ function MenuTop(props) {
     logout();
     // console.log('desconectado');
     window.location.reload();
-  }
+  };
   return (
     <div className="menu-top">
       <div className="menuTop__left">

@@ -5,7 +5,7 @@ import logo from "../../../assets/img/png/LOGO21.png";
 
 import RegisterForm from '../../../components/Admin/RegisterForm';
 import LoginForm from '../../../components/Admin/LoginForm';
-import {getAccessTokenApi} from '../../../api/auth';
+import { getAccessTokenApi } from '../../../api/auth';
 
 import "./SignIn.scss";
 
@@ -13,7 +13,7 @@ export default function SignIn() {
   const { Content } = Layout;
   const { TabPane } = Tabs;
   
-  if(getAccessTokenApi) {
+  if(getAccessTokenApi()) {
     return <Redirect to="/admin" />
   }
   return (
