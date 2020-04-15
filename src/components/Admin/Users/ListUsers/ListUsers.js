@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Switch,List,Avatar,Button,Icon } from 'antd';
 import NoAvatar from '../../../../assets/img/png/no-avatar.png';
-
+import Modal from '../../../Modal';
 import './ListUsers.scss';
 
 export default function ListUsers(props) {
@@ -23,6 +23,14 @@ export default function ListUsers(props) {
             </span>
            </div>
            {viewUserActives ? <UsersActive usersActive={usersActive} /> : <UsersInactive usersInactive={usersInactive} />}
+           
+           <Modal 
+           title="Mi modal!" 
+           isVisible={true} 
+           setIsVisible={() => console.log('asas')}>
+
+            Hola es mi primer modal
+           </Modal>
         </div>
     );
 }
