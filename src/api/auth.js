@@ -6,7 +6,7 @@ export function getAccessTokenApi() {
     const accessToken = localStorage.getItem(ACCESS_TOKEN);
   
     if (!accessToken || accessToken === "null") {
-      return null;
+        return null;
     }
   
     return willExpireToken(accessToken) ? null : accessToken;
