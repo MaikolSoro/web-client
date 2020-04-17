@@ -1,6 +1,8 @@
 import { basePath, apiVersion } from "./config";
 
-
+/*-----------------------------*/
+/* Registrar usuarios */
+/*-----------------------------*/
 export function signUpApi(data) {
     const url = `${basePath}/${apiVersion}/sign-up`;
     const params = {
@@ -54,6 +56,9 @@ export function signInApi(data) {
         return err.message;
       });
 }
+/*-----------------------------*/
+/* Mostrar usuarios */
+/*-----------------------------*/
 export function getUserApi(token) {
   const url = `${basePath}/${apiVersion}/users`; // endpoint
 
@@ -73,6 +78,9 @@ export function getUserApi(token) {
       return err.message;
     });
 }
+/*-----------------------------*/
+/* Mostrar usuarios activados */
+/*-----------------------------*/
 export function getUsersActiveApi(token, status) {
   const url = `${basePath}/${apiVersion}/users-active?active=${status}`; // endpoint
 
@@ -89,6 +97,78 @@ export function getUsersActiveApi(token, status) {
     }).then(result => {
       return result;
     }).catch(err =>{
+      return err.message;
+    });
+}
+
+/*-----------------------------*/
+/* Subir el avatar o imagen */
+/*-----------------------------*/
+export function uploadAvatarApi(token, avatar, userId) {
+  const url = `${basePath}/${apiVersion}/upload-avatar/${userId}`;
+
+  /*-----------------------------*/
+  /* Esto es obligatorio,cuando queremos mandar información o una imagen mediante una petición fetch */
+  /*-----------------------------*/
+  const formData = new FormData();
+  formData.append("avatar", avatar, avatar.name);
+
+  const params = {
+    method: "PUT",
+    body: formData,
+    headers: {
+      Authorization: token
+    }
+  };
+
+  return fetch(url, params)
+    .then(response => {
+      return response.json();
+    })
+    .then(result => {
+      return result;
+    })
+    .catch(err => {
+      return err.message;
+    });
+}
+/*-----------------------------*/
+/* Mostrar o obtner la imagen */
+/*-----------------------------*/
+export function getAvatarApi(avatarName) {
+  const url = `${basePath}/${apiVersion}/get-avatar/${avatarName}`;
+  return fetch(url)
+  .then(response => {
+    return response.url;
+  })
+  .catch(err =>{
+    return err.message;
+  });
+}
+
+/*-----------------------------*/
+/* Actualizar los datos del usuario */
+/*-----------------------------*/
+export function updateUserApi(token, user, userId) {
+  const url = `${basePath}/${apiVersion}/get-avatar/${userId}`;
+
+  const params = {
+    method: "PUT",
+    headers: {
+      "Contant-Type": "application/json",
+      Authorization: token
+    },
+    body: JSON.stringify(user)
+  };
+
+  return fetch(url, params)
+    .then(response => {
+      return response.json();
+    })
+    .then(result => {
+      return result;
+    })
+    .catch(err => {
       return err.message;
     });
 }
