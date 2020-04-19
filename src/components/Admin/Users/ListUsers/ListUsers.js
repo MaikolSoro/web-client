@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Switch,List,Avatar,Button,Icon } from 'antd';
 import NoAvatar from '../../../../assets/img/png/no-avatar.png';
 import Modal from '../../../Modal';
 import EditUserForm from '../EditUserForm';
+
+import {getAvatarApi} from '../../../../api/user';
+
 import './ListUsers.scss';
 
 export default function ListUsers(props) {
-    const {usersActive, usersInactive} = props;
+    const {usersActive, usersInactive, setReloadUsers} = props;
     const [viewUserActives, setViewUsersActives] = useState(true);
     const [isVisibleModal, setIsVisibleModal]    =  useState(false);
     const [modalTitle, setModalTitle] = useState("");
@@ -31,7 +34,8 @@ export default function ListUsers(props) {
                 <UsersActive usersActive={usersActive}
                             setIsVisibleModal={setIsVisibleModal} 
                             setModalTitle={setModalTitle} 
-                            setModalContent={setModalContent}/> ) : ( <UsersInactive usersInactive={usersInactive} />)}
+                            setModalContent={setModalContent}
+                            setReloadUsers={setReloadUsers}/> ) : ( <UsersInactive usersInactive={usersInactive} setReloadUsers={setReloadUsers} />)}
            
            <Modal 
            title={modalTitle} 
@@ -45,66 +49,103 @@ export default function ListUsers(props) {
 }
 
 function UsersActive(props) {
-    const { usersActive, setIsVisibleModal, setModalTitle, setModalContent} = props; 
+    const { usersActive, setIsVisibleModal, setModalTitle, setModalContent, setReloadUsers} = props; 
 
-    const ediUser = user =>{
+    const editUser = user =>{
         setIsVisibleModal(true);
         setModalTitle(`Editar ${user.name ? user.name : "..."} ${user.lastname ? user.lastname : "..."}`);
-        setModalContent(<EditUserForm user={user}/>);
+        setModalContent(<EditUserForm user={user} setIsVisibleModal={setIsVisibleModal} setReloadUsers={setReloadUsers}/>);
         console.log(user);
     };
     return (
-        <List className="users-active" itemLayout="horizontal" dataSource={usersActive} renderItem={user =>(
-
-            <List.Item actions={[
-
-                <Button type="primary" onClick={() => ediUser(user)}>
-                        <Icon type="edit" />
-                </Button>,
-                    <Button type="danger" onClick={()=> console.log("Desactivar Usuario")}>
-                        <Icon type="stop"/>
-                    </Button>,
-                        <Button type="danger" onClick={() => console.log("Eliminar usuario")}>
-                            <Icon type="delete"/>
-                        </Button>
-            ]}>
-                <List.Item.Meta avatar={<Avatar src={user.avatar ? user.avatar :  NoAvatar}/>} 
-                title={`${user.name ? user.name :'...'}
-                        ${user.lastname ? user.lastname : '...'}`}
-                description={user.email}
-                />
-               
-            </List.Item>
-        )}/>
+        <List
+         className="users-active" 
+         itemLayout="horizontal" 
+         dataSource={usersActive} 
+         renderItem={user =><UserActive user={user} editUser={editUser} setReloadUsers={setReloadUsers}/>}/>
         
         
     );
 }
 
-function UsersInactive(props){
-    const {usersInactive} = props;
+function UserActive(props) {
+    const { user, editUser } = props;
+    const [avatar, setAvatar] = useState(null);
+
+    useEffect(() => {
+        if(user.avatar) {
+            getAvatarApi(user.avatar).then(response => {
+                setAvatar(response);
+            })
+        }else {
+            setAvatar(null);
+        }
+    }, [user]);
 
     return (
-        <List className="users-active" itemLayout="horizontal" dataSource={usersInactive} renderItem={user =>(
+        <List.Item actions={[
 
-            <List.Item actions={[
-                <Button type="primary" onClick={() => console.log("Activar usuario")}>
-                        <Icon type="check" />
+            <Button type="primary" onClick={() => editUser(user)}>
+                    <Icon type="edit" />
+            </Button>,
+                <Button type="danger" onClick={()=> console.log("Desactivar Usuario")}>
+                    <Icon type="stop"/>
                 </Button>,
-                     <Button type="danger" onClick={() => console.log("Eliminar usuario")}>
-                         <Icon type="delete"/>
+                    <Button type="danger" onClick={() => console.log("Eliminar usuario")}>
+                        <Icon type="delete"/>
                     </Button>
-            ]}>
-                <List.Item.Meta avatar={<Avatar src={user.avatar ? user.avatar :  NoAvatar}/>} 
-                title={`${user.name ? user.name :'...'}
-                        ${user.lastname ? user.lastname : '...'}`}
-                description={user.email}
-                />
-               
-            </List.Item>
-        )}/>
-        
-        
+        ]}>
+            <List.Item.Meta avatar={<Avatar src={avatar ? avatar :  NoAvatar}/>} 
+            title={`${user.name ? user.name :'...'}
+                    ${user.lastname ? user.lastname : '...'}`}
+            description={user.email}
+            />
+           
+        </List.Item>
+    )
+}
+function UsersInactive(props){
+    const {usersInactive, setReloadUsers} = props;
+
+    return (
+        <List
+         className="users-active" 
+         itemLayout="horizontal"
+          dataSource={usersInactive} 
+          renderItem={user =><UserInactive user={user} setReloadUsers={setReloadUsers}/>}/>
     );
+}
+
+function UserInactive(props) {
+  const { user} = props;
+  const [avatar, setAvatar] = useState(null);
+
+  useEffect(() => {
+      if(user.avatar) {
+          getAvatarApi(user.avatar).then(response => {
+              setAvatar(response);
+          });
+      }else {
+          setAvatar(null);
+      }
+  }, [user]);
+
+  return (
+    <List.Item actions={[
+        <Button type="primary" onClick={() => console.log("Activar usuario")}>
+                <Icon type="check" />
+        </Button>,
+             <Button type="danger" onClick={() => console.log("Eliminar usuario")}>
+                 <Icon type="delete"/>
+            </Button>
+    ]}>
+        <List.Item.Meta avatar={<Avatar src={avatar ? avatar :  NoAvatar}/>} 
+        title={`${user.name ? user.name :'...'}
+                ${user.lastname ? user.lastname : '...'}`}
+        description={user.email}
+        />
+       
+    </List.Item>
+  );
 }
 
