@@ -1,7 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {Switch, List, Button, Icon, Modal as ModalAntd, notification} from 'antd';
 import Modal from  '../../../Modal';
-import DragSortableList from 'react-drag-sortable'
+import DragSortableList from 'react-drag-sortable';
+import {updateMenuApi} from '../../../../api/menu';
+import {getAccessTokenApi} from '../../../../api/auth';
+
 import "./MenuWebList.scss";
 
 
@@ -36,8 +39,18 @@ export default  function MenuWebList(props) {
         setListItems(listItemArray);
     }, [menu])
 
+    /*-----------------------------*/
+    /* Cambia el orden del menu */
+    /*-----------------------------*/
     const OnSort  = (sortedList, dropEvent) => {
-            console.log(sortedList);
+        const accesToken = getAccessTokenApi();
+
+        sortedList.forEach(item =>{
+            const{_id } = item.content.props.Item;
+            const order = item.rank;
+            
+            updateMenuApi(accesToken, _id, {order});
+        })
     };
 
     return (
