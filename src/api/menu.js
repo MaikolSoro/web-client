@@ -94,3 +94,30 @@ export function addMenuApi(token, menu) {
         return err;
     });
 }
+
+/*-----------------------------*/
+/* Eliminar menu desde de la api */
+/*-----------------------------*/
+export function deleteMenuApi(token, menuId) {
+
+  const url = `${basePath}/${apiVersion}/delete-menu/${menuId}`;
+  const params ={
+    method: "DELETE",
+
+    headers: {
+        "Content-Type": "application/json",
+        Authorization: token
+    }
+   
+};
+
+    return fetch(url, params)
+    .then(response => {
+        return response.json();
+    }).then(result => {
+        return result.message;
+    })
+    .catch(err => {
+        return err;
+    });
+}
