@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
+import "./MenuWebList.scss";
 export default  function MenuWebList(props) {
     const { menu, setReloadMenuWeb } = props;
     
