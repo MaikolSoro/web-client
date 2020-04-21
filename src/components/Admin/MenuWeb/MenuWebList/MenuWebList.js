@@ -62,16 +62,15 @@ export default  function MenuWebList(props) {
     /*-----------------------------*/
     /* Cambia el orden del menu */
     /*-----------------------------*/
-    const OnSort  = (sortedList, dropEvent) => {
+    const onSort = (sortedList, dropEvent) => {
         const accesToken = getAccessTokenApi();
-
-        sortedList.forEach(item =>{
-            const{_id } = item.content.props.Item;
-            const order = item.rank;
-            
-            updateMenuApi(accesToken, _id, {order});
-        })
-    };
+    
+        sortedList.forEach(item => {
+          const { _id } = item.content.props.item;
+          const order = item.rank;
+          updateMenuApi(accesToken, _id, { order });
+        });
+      };
 
     /**
      * Crear menú
@@ -137,7 +136,7 @@ export default  function MenuWebList(props) {
                 <Button type="primary" onClick={addMenuWebModal}>Crear menú</Button>
             </div>
             <div className="menu-web-list__items">
-                <DragSortableList items={listItems} OnSort={OnSort} type="vertical"/>
+                <DragSortableList items={listItems} onSort={onSort} type="vertical"/>
             </div>
             <Modal title={modalTitle} 
                     isVisible={isVisibleModal} 

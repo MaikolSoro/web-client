@@ -21,24 +21,26 @@ export function getMenuApi() {
 /*-----------------------------*/
 export function updateMenuApi(token, menuId, data) {
     const url = `${basePath}/${apiVersion}/update-menu/${menuId}`;
-    const params = {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: token
-        },
-        //La información que se va actualizar
-        body: JSON.stringify(data)
-    };
 
+    const params = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token
+      },
+      body: JSON.stringify(data)
+    };
+  
     return fetch(url, params)
-    .then(response => {
+      .then(response => {
         return response.json();
-    }).then(result => {
+      })
+      .then(result => {
         return result.message;
-    }).catch(err => {
+      })
+      .catch(err => {
         return err;
-    });
+      });
 }
 
 /*-----------------------------*/

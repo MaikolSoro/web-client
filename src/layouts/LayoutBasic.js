@@ -5,20 +5,22 @@ import MenuTop from  "../components/Web/MenuTop";
 import "./LayoutBasic.scss";
 
 
-function LayoutBasic(props) {
+export default function LayoutBasic(props) {
   const { routes } = props;
   const { Footer } = Layout;
 
   return (
-    <Row>
-      <Col lg={4} />
-        <Col lg={16}>
-          <MenuTop />
-          <LoadRouters routes={routes} />
-          <Footer>Michael Soro</Footer>
-        </Col>
+    <>
+      <Row>
         <Col lg={4} />
-    </Row>
+          <Col lg={16}>
+            <MenuTop />
+          </Col>
+          <Col lg={4} />
+      </Row>
+        <LoadRouters routes={routes} />
+        <Footer>Michael Soro</Footer>
+    </>
   );
   
 }
@@ -37,5 +39,3 @@ function LoadRouters({ routes }) {
        </Switch>
       ); 
 }
-
-export default LayoutBasic;
