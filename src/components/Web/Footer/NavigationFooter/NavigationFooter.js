@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { Row, Col, Icon } from "antd";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import "./NavigationFooter.scss";
 
 export default function NavigationFooter() {

@@ -29,6 +29,13 @@ import "./MenuSider.scss";
             <span className="nac-text">Menú</span>
           </Link>
         </Menu.Item>
+
+        <Menu.Item key="/admin/blog">
+          <Link to={"/admin/blog"}>
+            <Icon type="message" />
+            <span className="nac-text">Blog</span>
+          </Link>
+        </Menu.Item>
       </Menu>
     </Sider>
   );

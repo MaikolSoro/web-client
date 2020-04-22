@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Form, Icon, Input, Button, notification } from "antd";
 import { suscribeNewsletterApi } from "../../../api/newsletter";
