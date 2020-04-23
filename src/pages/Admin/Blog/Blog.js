@@ -56,7 +56,7 @@ import "./Blog.scss";
             </Button>
            </div>
 
-           <PostsList  posts={posts}/>
+           <PostsList  posts={posts} setReloadPosts={setReloadPosts}/>
           <Pagination  posts={posts} location={location} history={history}/>
            <Modal title={modalTitle}
                   isVisible={isVisibleModal}
