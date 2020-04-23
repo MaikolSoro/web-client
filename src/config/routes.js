@@ -8,10 +8,11 @@ import AdminSignIn from "../pages/Admin/SignIn";
 import AdminUsers from "../pages/Admin/Users";
 import AdminMenuWeb from "../pages/Admin/MenuWeb";
 import AdminBlog  from "../pages/Admin/Blog";
-// pages
 
+// pages
 import Home from "../pages/Home";
 import Contact from "../pages/Contact";
+import Blog from "../pages/Blog";
 
 // others
 
@@ -66,6 +67,16 @@ const routes = [
       {
         path: "/contact",
         component: Contact,
+        exact: true
+      },
+      {
+        path: "/blog",
+        component: Blog,
+        exact: true
+      },
+      {
+        path: "/blog/:url",
+        component: Blog,
         exact: true
       },
       {
