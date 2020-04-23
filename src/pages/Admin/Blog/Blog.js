@@ -3,6 +3,8 @@ import { Button, notification } from "antd";
 import { withRouter} from "react-router-dom";
 import queryString from "query-string";
 import Modal from "../../../components/Modal";
+import PostsList from "../../../components/Admin/Blog/PostsList";
+import Pagination from "../../../components/Pagination";
 import { getPostsApi } from "../../../api/post";
 import "./Blog.scss";
 
@@ -11,6 +13,7 @@ import "./Blog.scss";
 
     /*-----------------------------*/
     /* Estados de blog */
+    /* Se utiliza location para sacar la query
     /*-----------------------------*/
     const {location, history } = props;
     const [posts, setPosts] = useState(null);
@@ -42,6 +45,9 @@ import "./Blog.scss";
         setReloadPosts(false);
     }, [page, reloadPosts]);
 
+    if(!posts) {
+        return null;
+    }
     return (
         <div className="blog">
            <div className="blog__add-post">
@@ -50,8 +56,8 @@ import "./Blog.scss";
             </Button>
            </div>
 
-            <h1>Post list...</h1>
-            <h2>Paginación</h2>
+           <PostsList  posts={posts}/>
+          <Pagination  posts={posts} location={location} history={history}/>
            <Modal title={modalTitle}
                   isVisible={isVisibleModal}
                   setVisible={setIsVisibleModal}
