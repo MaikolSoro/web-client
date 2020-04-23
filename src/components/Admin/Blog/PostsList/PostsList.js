@@ -12,7 +12,7 @@ export default function PostsList(props) {
     const { posts, setReloadPosts } = props;
 
     /*-----------------------------*/
-    /* eliminar un post de la lista */
+    /* Eliminar un post de la lista */
     /*-----------------------------*/
     const deletePost = post => {
         const accessToken = getAccessTokenApi();
@@ -52,7 +52,7 @@ export default function PostsList(props) {
     );
 }
 /*-----------------------------*/
-/* Componente nuevo para pasarle toda la información y devuelve todo el componente
+/* Componente nuevo para pasarle toda la información y devuelve todo el componente.
  */
 /*-----------------------------*/
 function Post(props) {
