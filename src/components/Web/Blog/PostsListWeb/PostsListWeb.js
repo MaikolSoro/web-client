@@ -5,6 +5,7 @@ import moment from "moment";
 import queryString from "query-string";
 import Pagination from "../../../Pagination";
 import {getPostsApi} from "../../../../api/post";
+import { Helmet } from "react-helmet";
 
 import  "moment/locale/es" // para que me devuelva todo a español
 import "./PostsListWeb.scss";
@@ -41,7 +42,11 @@ export default function PostListWeb(props) {
         );
       }
     return (
-        <div className="posts-list-web">
+      <>
+      <Helmet>
+        <title>Blog de programación | Michael Soro</title>
+      </Helmet>
+      <div className="posts-list-web">
         <h1>Blog</h1>
         <List
           dataSource={posts.docs}
@@ -49,18 +54,18 @@ export default function PostListWeb(props) {
         />
         <Pagination posts={posts} location={location} history={history} />
       </div>
+    </>
     );
-
 }
 
- /*-----------------------------*/
+/*-----------------------------*/
 /* La información del posts  y lo que va visualizar el cliente*/
 /*-----------------------------*/
 function Post(props) {
     const { post } = props;
     const day = moment(post.date).format("DD");
     const month = moment(post.date).format("MMMM");
-  
+
     return (
       <List.Item className="post">
         <div className="post__date">
