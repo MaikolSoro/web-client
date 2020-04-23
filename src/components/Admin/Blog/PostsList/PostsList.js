@@ -43,13 +43,15 @@ export default function PostsList(props) {
       };
 
     return (
-        <div className="posts-list">
-         <List  
-         dataSource={posts.docs}
-         renderItem={post => <Post post={post} deletePost={deletePost}/>}
-         />
-        </div>
-    );
+      <div className="posts-list">
+      <List
+        dataSource={posts.docs}
+        renderItem={post => (
+          <Post post={post} deletePost={deletePost}  />
+        )}
+      />
+    </div>
+  );
 }
 /*-----------------------------*/
 /* Componente nuevo para pasarle toda la información y devuelve todo el componente.
@@ -59,21 +61,21 @@ function Post(props) {
 const {post, deletePost} = props;  
 
     return (
-        <List.Item>
-            actions={[
-                <Link to={`/blog/${post.url}`} target="_blank">
-                    <Button type="primary"  >
-                         <Icon type ="eye" />
-                    </Button>
-                </Link>,
-                <Button  type="primary">
-                    <Icon type="edit"/>
-                </Button>,  
-                <Button  type="danger" onClick={() => deletePost(post)}>
-                    <Icon type="delete"/>
-                </Button>   
-            ]}>
-                <List.Item.Meta title={post.title}/>
+        <List.Item
+        actions={[
+          <Link to={`/blog/${post.url}`} target="_blank">
+            <Button type="primary">
+              <Icon type="eye" />
+            </Button>
+          </Link>,
+          <Button type="primary">
+            <Icon type="edit" />
+          </Button>,
+          <Button type="danger" onClick={() => deletePost(post)}>
+            <Icon type="delete" />
+          </Button>
+        ]}>
+            <List.Item.Meta title={post.title}/>
         </List.Item>
     );
 }

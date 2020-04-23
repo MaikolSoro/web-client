@@ -46,6 +46,7 @@ import "./Blog.scss";
         setReloadPosts(false);
     }, [page, reloadPosts]);
 
+
     const addPost = () => {
 
         setIsVisibleModal(true); 
@@ -57,8 +58,7 @@ import "./Blog.scss";
              post={null}
             />
         );
-
-    }
+    };
 
      if(!posts) {
         return null;
@@ -71,8 +71,12 @@ import "./Blog.scss";
             </Button>
            </div>
 
-           <PostsList  posts={posts} setReloadPosts={setReloadPosts}/>
-          <Pagination  posts={posts} location={location} history={history}/>
+           <PostsList
+             posts={posts}
+             setReloadPosts={setReloadPosts}
+        //    editPost={editPost}
+         />
+         <Pagination posts={posts} location={location} history={history} />
            <Modal title={modalTitle}
                   isVisible={isVisibleModal}
                   setIsVisible={setIsVisibleModal}
