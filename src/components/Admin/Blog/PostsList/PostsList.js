@@ -9,7 +9,7 @@ import "./PostsList.scss";
 const {confirm } = Modal;
 
 export default function PostsList(props) {
-    const { posts, setReloadPosts } = props;
+    const { posts, setReloadPosts, editPost} = props;
 
     /*-----------------------------*/
     /* Eliminar un post de la lista */
@@ -47,7 +47,7 @@ export default function PostsList(props) {
       <List
         dataSource={posts.docs}
         renderItem={post => (
-          <Post post={post} deletePost={deletePost}  />
+          <Post post={post} deletePost={deletePost} editPost={editPost} />
         )}
       />
     </div>
@@ -58,7 +58,7 @@ export default function PostsList(props) {
  */
 /*-----------------------------*/
 function Post(props) {
-const {post, deletePost} = props;  
+const {post, deletePost , editPost} = props;  
 
     return (
         <List.Item
@@ -68,7 +68,7 @@ const {post, deletePost} = props;
               <Icon type="eye" />
             </Button>
           </Link>,
-          <Button type="primary">
+          <Button type="primary" onClick={() => editPost(post)}>
             <Icon type="edit" />
           </Button>,
           <Button type="danger" onClick={() => deletePost(post)}>

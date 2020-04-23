@@ -1,9 +1,10 @@
+/* eslint-disable no-multi-str */
 import React, {useState, useEffect} from 'react';
 import  { Row, Col, Form, Icon, Input, Button, DatePicker, notification } from "antd";
 import { Editor } from "@tinymce/tinymce-react";
 import moment from "moment";
 import  { getAccessTokenApi } from "../../../../api/auth";
-import { addPostApi } from "../../../../api/post";
+import { addPostApi, updatePostApi } from "../../../../api/post";
 
 import "./AddEditPostForm.scss";
 
@@ -35,7 +36,7 @@ export default function AddEditPostForm(props) {
           if (!post) {
             addPost();
           } else {
-            // updatePost(); actualiza post
+             updatePost(); //actualiza post
           }
         }
       };
@@ -54,6 +55,28 @@ export default function AddEditPostForm(props) {
             });
             setIsVisibleModal(false);
             setReloadPosts(true);
+            setPostData({});
+          })
+          .catch(() => {
+            notification["error"]({
+              message: "Error del servidor."
+            });
+          });
+      };
+
+      /*-----------------------------*/
+      /* La Logica para editar un post */
+      /*-----------------------------*/
+      const updatePost = () => {
+        const token = getAccessTokenApi();
+        updatePostApi(token, post._id, postData)
+          .then(response => {
+            const typeNotification = response.code === 200 ? "success" : "warning";
+            notification[typeNotification]({
+              message: response.message
+            });
+            setIsVisibleModal(false);// cierro el modal cuando se actualice
+            setReloadPosts(true);// recargar todos los posts
             setPostData({});
           })
           .catch(() => {

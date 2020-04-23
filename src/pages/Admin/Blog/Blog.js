@@ -60,6 +60,21 @@ import "./Blog.scss";
         );
     };
 
+    /*-----------------------------*/
+    /* Editar post */
+    /*-----------------------------*/
+    const editPost = post => {
+
+        setIsVisibleModal(true); 
+        setModalTitle("Editar post");
+        setModalContent(
+            <AddEditPostForm 
+             setIsVisibleModal={setIsVisibleModal}
+             setReloadPosts={setReloadPosts}
+             post={post}
+            />
+        );
+    }
      if(!posts) {
         return null;
     }
@@ -74,7 +89,7 @@ import "./Blog.scss";
            <PostsList
              posts={posts}
              setReloadPosts={setReloadPosts}
-        //    editPost={editPost}
+             editPost={editPost}
          />
          <Pagination posts={posts} location={location} history={history} />
            <Modal title={modalTitle}

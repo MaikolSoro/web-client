@@ -70,3 +70,30 @@ export function addPostApi(token, post) {
       return err;
     });
 }
+
+/*-----------------------------*/
+/* Actualizar un post desde la api */
+/*-----------------------------*/
+export function updatePostApi(token, id, data) {
+  const url = `${basePath}/${apiVersion}/update-post/${id}`;
+
+  const params = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token
+    },
+    body: JSON.stringify(data)
+  };
+
+  return fetch(url, params)
+    .then(response => {
+      return response.json();
+    })
+    .then(result => {
+      return result;
+    })
+    .catch(err => {
+      return err;
+    });
+}
