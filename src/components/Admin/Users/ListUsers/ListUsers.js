@@ -261,4 +261,3 @@ function UserInactive(props) {
     </List.Item>
   );
 }
-
