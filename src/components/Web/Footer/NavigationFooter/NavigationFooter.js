@@ -25,11 +25,6 @@ function RenderListLeft() {
         <ul>
           <li>
             <a href="#">
-              <Icon type="book" /> Cursos Online
-            </a>
-          </li>
-          <li>
-            <a href="#">
               <Icon type="code" /> Desarrollo Web
             </a>
           </li>
@@ -55,11 +50,7 @@ function RenderListRight() {
             <Icon type="hdd" /> Sistemas / Servidores
           </a>
         </li>
-        <li>
-          <a href="#">
-            <Icon type="appstore" /> CMS
-          </a>
-        </li>
+      
         <li>
           <a href="#">
             <Icon type="user" /> Porfolio

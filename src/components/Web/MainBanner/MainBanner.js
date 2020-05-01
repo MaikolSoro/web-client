@@ -11,10 +11,8 @@ export default function MainBanner() {
         <Row>
             <Col lg ={4} />
             <Col lg ={16}>
-                <h2>Aprender nuevas <br/> tecnologías web y móvil.</h2>
-                <h3>
-                    A través  de cursos  de información
-                </h3>
+                <h2>Desarrollo Web <br/> Full Stack</h2>
+                
             </Col>
             <Col lg ={4} />
         </Row>

@@ -3,7 +3,7 @@ import { Menu } from "antd";
 import { Link } from "react-router-dom";
 import SocialLinks from "../SocialLinks";
 import { getMenuApi }  from  "../../../api/menu";
-import logoWeb from "../../../assets/img/png/logoWeb2.png";
+import logoWeb from "../../../assets/img/png/logoPersonal.png";
 import "./MenuTop.scss";
 
 
