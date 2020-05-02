@@ -3,7 +3,7 @@ import {Row, Col, Card, Button } from "antd";
 import { Link } from "react-router-dom";
 
 // importar las imagenes
-
+import restaurante from "../../../assets/img/jpg/restaurant-pos.jpg";
 
 import "./HomePrincipal.scss";
 
@@ -18,13 +18,25 @@ export default function HomePrincipal() {
                 <Row className="row-apps">
                     <Col md={6}>
                     <CardPrincipal 
-                        // image={} 
+                        image={restaurante} 
                         title="App en JavaScript"
                         subtitle="React-Node.js" link=""/>
                     </Col>
                     <Col md={6}>
                     <CardPrincipal 
-                        // image={} 
+                        image={restaurante} 
+                        title="App en JavaScript"
+                        subtitle="React-Node.js" link=""/>
+                    </Col>
+                    <Col md={6}>
+                    <CardPrincipal 
+                        image={restaurante} 
+                        title="App en JavaScript"
+                        subtitle="React-Node.js" link=""/>
+                    </Col>
+                    <Col md={6}>
+                    <CardPrincipal 
+                        image={restaurante} 
                         title="App en JavaScript"
                         subtitle="React-Node.js" link=""/>
                     </Col>
@@ -32,16 +44,28 @@ export default function HomePrincipal() {
                 <Row className="row-apps">
                  <Col md={6}>
                     <CardPrincipal 
-                        // image={} 
+                        image={restaurante} 
                         title="App en JavaScript"
                         subtitle="React-Node.js" link=""/>
                 </Col>
-               
+                <Col md={6} />
+                <Col md={6} />
+                <Col md={6}>
+                <CardPrincipal 
+                        image={restaurante} 
+                        title="App en JavaScript"
+                        subtitle="React-Node.js" link=""/>
+                </Col>
                 </Row>
             </Col>
             <Col lg={4} />
+                <Col lg={24} className="home-principal__more">
+                    <Link to="/home">
+                        <Button>Ver más</Button>
+                    </Link>
+            </Col>
      </Row>
-    )
+    );
 }
 
 // Cartas de las imagenes 
@@ -51,7 +75,7 @@ function CardPrincipal(props) {
 
     return (
         <a href={link} target="_blank" rel="noopener noreferrer">
-            <Card className="gone-principal__card"
+            <Card className="home-principal__card"
             cover={<img src={image} alt={title} />}
             actions={[<Button>Ingresar</Button>]}
             >
