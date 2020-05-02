@@ -3,7 +3,12 @@ import {Row, Col, Card, Button } from "antd";
 import { Link } from "react-router-dom";
 
 // importar las imagenes
-import restaurante from "../../../assets/img/jpg/restaurant-pos.jpg";
+import ventas from "../../../assets/img/jpg/Pos.png";
+import php from "../../../assets/img/jpg/PHP.png";
+import ionic from "../../../assets/img/jpg/ionic.png";
+import qrscanner from "../../../assets/img/jpg/qrScanner.png";
+import peliculas from "../../../assets/img/jpg/peliculas.png";
+import restaurant from "../../../assets/img/jpg/restaurant.jpg";
 
 import "./HomePrincipal.scss";
 
@@ -18,43 +23,43 @@ export default function HomePrincipal() {
                 <Row className="row-apps">
                     <Col md={6}>
                     <CardPrincipal 
-                        image={restaurante} 
-                        title="App en JavaScript"
-                        subtitle="React-Node.js" link=""/>
+                        image={ventas} 
+                        title="Sistema ventas con c#"
+                        subtitle="Hecho con lenguaje c#" link=""/>
                     </Col>
                     <Col md={6}>
                     <CardPrincipal 
-                        image={restaurante} 
-                        title="App en JavaScript"
-                        subtitle="React-Node.js" link=""/>
+                        image={php}
+                        title="Sistema de ventas"
+                        subtitle="Hecho con lenguaje php" link=""/>
                     </Col>
                     <Col md={6}>
                     <CardPrincipal 
-                        image={restaurante} 
-                        title="App en JavaScript"
-                        subtitle="React-Node.js" link=""/>
+                        image={ionic} 
+                        title="App de noticias"
+                        subtitle="ionic con angular" link=""/>
                     </Col>
                     <Col md={6}>
                     <CardPrincipal 
-                        image={restaurante} 
-                        title="App en JavaScript"
-                        subtitle="React-Node.js" link=""/>
+                        image={qrscanner} 
+                        title="App de qrscanner"
+                        subtitle="ionic con angular" link=""/>
                     </Col>
                 </Row>
                 <Row className="row-apps">
                  <Col md={6}>
                     <CardPrincipal 
-                        image={restaurante} 
-                        title="App en JavaScript"
-                        subtitle="React-Node.js" link=""/>
+                        image={peliculas}
+                        title="App en ionic"
+                        subtitle="ionic con angular" link=""/>
                 </Col>
                 <Col md={6} />
                 <Col md={6} />
                 <Col md={6}>
                 <CardPrincipal 
-                        image={restaurante} 
-                        title="App en JavaScript"
-                        subtitle="React-Node.js" link=""/>
+                        image={restaurant}
+                        title="Sistema para restaurante o bares"
+                        subtitle="Hecho con lenguaje c#" link=""/>
                 </Col>
                 </Row>
             </Col>
@@ -80,7 +85,7 @@ function CardPrincipal(props) {
             actions={[<Button>Ingresar</Button>]}
             >
             <Meta title={title} description={subtitle} />
-            ...
+            
             </Card>
         </a>
     )
