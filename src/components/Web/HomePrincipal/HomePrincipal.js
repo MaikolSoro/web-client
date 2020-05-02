@@ -13,11 +13,51 @@ export default function HomePrincipal() {
         <Col lg={24} className="home-principal__title">
             <h2>App realizadas en el  2020 !!</h2>
         </Col>
-        <Col lg={4} />
-        <Col lg={16}>
-            
-        </Col>
-        <Col lg={4} />
+         <Col lg={4} />
+            <Col lg={16}>
+                <Row className="row-apps">
+                    <Col md={6}>
+                    <CardPrincipal 
+                        // image={} 
+                        title="App en JavaScript"
+                        subtitle="React-Node.js" link=""/>
+                    </Col>
+                    <Col md={6}>
+                    <CardPrincipal 
+                        // image={} 
+                        title="App en JavaScript"
+                        subtitle="React-Node.js" link=""/>
+                    </Col>
+                </Row>
+                <Row className="row-apps">
+                 <Col md={6}>
+                    <CardPrincipal 
+                        // image={} 
+                        title="App en JavaScript"
+                        subtitle="React-Node.js" link=""/>
+                </Col>
+               
+                </Row>
+            </Col>
+            <Col lg={4} />
      </Row>
+    )
+}
+
+// Cartas de las imagenes 
+function CardPrincipal(props) {
+    const { image, title, subtitle, link } = props;
+    const { Meta } = Card;
+
+    return (
+        <a href={link} target="_blank" rel="noopener noreferrer">
+            <Card className="gone-principal__card"
+            cover={<img src={image} alt={title} />}
+            actions={[<Button>Ingresar</Button>]}
+            >
+            <Meta title={title} description={subtitle} />
+            ...
+            </Card>
+        </a>
     )
 }
