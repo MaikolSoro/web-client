@@ -14,7 +14,7 @@ export default function PostInfo(props) {
 
 
   /*-----------------------------*/
-  /* Van hacer la llamada para obtner todos los datos del posts */
+  /* Van hacer la llamada para obtener todos los datos del posts */
   /*-----------------------------*/
   useEffect(() => {
     getPostApi(url)
