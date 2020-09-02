@@ -1,5 +1,5 @@
 ## Personal Website
-Web Personal MERN Full Stack: MongoDB, Express, React y Node
+Blog style personal website where I can buy different items from users🌐📰
 
 ## ✔ Technologies
 - [ReactJS Documentation](https://es.reactjs.org/)
